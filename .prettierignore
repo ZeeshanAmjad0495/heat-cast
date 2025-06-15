@@ -1,0 +1,21 @@
+# Ignore compiled output
+build/
+dist/
+
+# Ignore dependencies
+node_modules/
+
+# Ignore configs
+eslint.config.js
+commitlint.config.cjs
+
+# Ignore specific files
+coverage/
+*.min.js
+
+README.md
+*.json
+
+.prettierrc.json
+.prettierignore
+.env
