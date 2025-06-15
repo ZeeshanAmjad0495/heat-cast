@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+    <h1>🌤 Weather Finder</h1>
+    <input type="text" id="city-input" placeholder="Enter city name">
+    
+    <button onclick="getData()">Get Weather</button>
+      </form>
+
+      <div class="weather-card">
+        <h2 id="city-name">City Name</h2>
+        <p id="temperature">Temperature: --°F</p>
+      </div>
+    </div>
+  </body>
+  <script>
+    async function getData() {
+      const cityName = document.getElementById('city-input').value.trim();
+
+      const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${cityName}?unitGroup=us&key=KV4LSMZL6XKPAC5SWWUJGKJY4&contentType=json`;
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`Response status: ${response.status}`);
+        }
+
+        const json = await response.json();
+        console.log(json);
+        const city = json.address;
+        const temperature = json.currentConditions.temp;
+        document.getElementById('temperature').innerHTML = `${temperature} °F`;
+        document.getElementById('city-name').innerHTML = city;
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
+  </script>
+</html>
