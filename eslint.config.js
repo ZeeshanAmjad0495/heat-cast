@@ -10,21 +10,24 @@ export default defineConfig([
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        ...globals.commonjs,
+      },
     },
     plugins: {
       js,
       unicorn,
       import: eslintPluginImport,
     },
-    ignores: ['dist', 'node_modules'],
-    extends: [
-      'js/recommended',
-      'plugin:unicorn/recommended',
-      'plugin:import/errors',
-      'plugin:import/warnings',
-    ],
+    ignores: ['dist', 'node_modules', 'eslint.config.js', 'commitlint.config.cjs'],
     rules: {
+      ...js.configs.recommended.rules,
+      ...unicorn.configs.recommended.rules,
+      ...eslintPluginImport.configs.errors.rules,
+      ...eslintPluginImport.configs.warnings.rules,
+
       eqeqeq: 'error',
       'no-console': 'error',
       'no-unused-vars': ['error', { vars: 'all', args: 'after-used', ignoreRestSiblings: false }],
@@ -40,6 +43,7 @@ export default defineConfig([
       'consistent-return': 'error',
       'dot-notation': 'error',
       'import/extensions': ['error', 'always'],
+      'unicorn/expiring-todo-comments': 'off',
     },
   },
 ]);
