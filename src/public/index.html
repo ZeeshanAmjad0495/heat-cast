@@ -9,15 +9,21 @@
   <body>
     <div class="container">
       <h1>🌤 Weather Finder</h1>
-      <input type="text" id="city-input" placeholder="Enter city name" />
-
-      <button onclick="getData()">Get Weather</button>
-
+      <form>
+        <input type="text" id="city-input" placeholder="Enter city name" />
+        <select name="unit-group" id="unit-group">
+          <option value="us" selected>US(°F)</option>
+          <option value="metric">Metric(°C)</option>
+          <option value="uk">UK(°C)</option>
+        </select>
+        <button type="submit">Get Weather</button>
+      </form>
       <div class="weather-card">
         <h2 id="city-name">City Name</h2>
         <p id="temperature">Temperature: --°F</p>
       </div>
+      <div id="error-division" style="display: none; color: #850101; margin-top: 1rem"></div>
     </div>
+    <script type="module" src="../../dist/index.js"></script>
   </body>
-  <script src="../dist/index.js"></script>
 </html>

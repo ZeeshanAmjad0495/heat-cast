@@ -35,7 +35,8 @@ form {
   flex-direction: column;
 }
 
-input[type='text'] {
+input[type='text'],
+select {
   padding: 10px;
   border: none;
   border-radius: 8px;
