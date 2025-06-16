@@ -6,7 +6,8 @@
     "lint": "eslint .",
     "prettier:check": "prettier --check .",
     "proof": "git rev-parse HEAD | cowsay -r",
-    "build": "npm-run-all lint prettier:check proof tsc --noEmit",
+    "build": "npm-run-all lint prettier:check typecheck proof",
+    "typecheck":"tsc --noEmit",
     "commitlint": "commitlint --edit",
     "prettier:write": "npx prettier --write ."
   },
