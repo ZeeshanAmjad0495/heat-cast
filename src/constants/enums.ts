@@ -1,3 +1,10 @@
+enum Selector {
+  ErrorDivision = 'div#error-division',
+  Form = 'form',
+  CityNameInput = 'input#city-input',
+  UnitGroupSelect = 'select#unit-group',
+}
+
 enum Unit {
   US = '°F',
   METRIC = '°C',
@@ -10,4 +17,4 @@ enum UnitGroup {
   UK = 'uk',
 }
 
-export { Unit, UnitGroup };
+export { Selector, Unit, UnitGroup };

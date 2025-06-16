@@ -1,5 +1,11 @@
-import { Unit, UnitGroup } from './constants/enums.js';
-import { API_KEY, BASE_URL, NO_MATCHING_ELEMENT_ERROR_MESSAGE } from './constants/constants.js';
+import { Selector, Unit, UnitGroup } from './constants/enums.js';
+import {
+  API_KEY,
+  BASE_URL,
+  FORM_ELEMENT_NOT_FOUND_ERROR_MESSAGE,
+  NO_MATCHING_ELEMENT_ERROR_MESSAGE,
+  UNABLE_TO_RETRIEVE_DATA_ERROR_MESSAGE,
+} from './constants/constants.js';
 
 const getUnitGroup = (unitGroupValue: string): UnitGroup =>
   Object.values(UnitGroup).find((unitGroup) => unitGroup === unitGroupValue) ?? UnitGroup.US;
@@ -14,9 +20,9 @@ const getUnit = (unitGroupValue: string): Unit => {
 async function getData(event: SubmitEvent): Promise<void> {
   event.preventDefault();
 
-  const errorDivision = document.querySelector<HTMLDivElement>('#error-division');
-  const cityNameInput = document.querySelector<HTMLInputElement>('input#city-input');
-  const unitGroupSelect = document.querySelector<HTMLSelectElement>('select#unit-group');
+  const cityNameInput = document.querySelector<HTMLInputElement>(Selector.CityNameInput);
+  const errorDivision = document.querySelector<HTMLDivElement>(Selector.ErrorDivision);
+  const unitGroupSelect = document.querySelector<HTMLSelectElement>(Selector.UnitGroupSelect);
 
   if (errorDivision) {
     errorDivision.style.display = 'none';
@@ -65,14 +71,14 @@ async function getData(event: SubmitEvent): Promise<void> {
   } catch (error) {
     if (errorDivision) {
       errorDivision.style.display = 'block';
-      errorDivision.innerText = '❌ Unable to retrieve weather data. Please try again.';
+      errorDivision.innerText = UNABLE_TO_RETRIEVE_DATA_ERROR_MESSAGE;
     }
     throw error;
   }
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-  const form = document.querySelector<HTMLFormElement>('form');
-  if (!form) throw new Error('Form element not found.');
+  const form = document.querySelector<HTMLFormElement>(Selector.Form);
+  if (!form) throw new Error(FORM_ELEMENT_NOT_FOUND_ERROR_MESSAGE);
   form.addEventListener('submit', getData);
 });
