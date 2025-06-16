@@ -1,11 +1,11 @@
-import { Selector } from './constants/enums.js';
+import { Selector } from '../constants/enums.js';
 import {
   API_KEY,
   BASE_URL,
   FORM_ELEMENT_NOT_FOUND_ERROR_MESSAGE,
   NO_MATCHING_ELEMENT_ERROR_MESSAGE,
   UNABLE_TO_RETRIEVE_DATA_ERROR_MESSAGE,
-} from './constants/constants.js';
+} from '../constants/constants.js';
 import getUnit from './utilities/get-unit.js';
 import getUnitGroup from './utilities/get-unit-group.js';
 
