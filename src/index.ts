@@ -1,4 +1,4 @@
-import { Selector, Unit, UnitGroup } from './constants/enums.js';
+import { Selector } from './constants/enums.js';
 import {
   API_KEY,
   BASE_URL,
@@ -6,18 +6,10 @@ import {
   NO_MATCHING_ELEMENT_ERROR_MESSAGE,
   UNABLE_TO_RETRIEVE_DATA_ERROR_MESSAGE,
 } from './constants/constants.js';
+import getUnit from './utilities/get-unit.js';
+import getUnitGroup from './utilities/get-unit-group.js';
 
-const getUnitGroup = (unitGroupValue: string): UnitGroup =>
-  Object.values(UnitGroup).find((unitGroup) => unitGroup === unitGroupValue) ?? UnitGroup.US;
-
-const getUnit = (unitGroupValue: string): Unit => {
-  const selectedUnit = Object.keys(Unit).find(
-    (unit) => unit.toLowerCase() === unitGroupValue.toLowerCase(),
-  );
-  return selectedUnit ? Unit[selectedUnit as keyof typeof Unit] : Unit.US;
-};
-
-async function getData(event: SubmitEvent): Promise<void> {
+async function getWeatherData(event: SubmitEvent): Promise<void> {
   event.preventDefault();
 
   const cityNameInput = document.querySelector<HTMLInputElement>(Selector.CityNameInput);
@@ -80,5 +72,5 @@ async function getData(event: SubmitEvent): Promise<void> {
 window.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector<HTMLFormElement>(Selector.Form);
   if (!form) throw new Error(FORM_ELEMENT_NOT_FOUND_ERROR_MESSAGE);
-  form.addEventListener('submit', getData);
+  form.addEventListener('submit', getWeatherData);
 });
